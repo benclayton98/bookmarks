@@ -15,6 +15,13 @@ app.get('/', async (req, res) => {
     })
 })
 
+app.post('/', async (req, res) => {
+    await models.Bookmark.create({
+        url: req.body.url
+    })
+    res.redirect('/')
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
   })
