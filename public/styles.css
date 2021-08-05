@@ -1,0 +1,120 @@
+
+body{
+    background-color: rgb(11, 202, 139) ;
+}
+
+.centreHeading{
+    position: relative;
+    left: 38%;
+    top:0pt;
+    font-family: 'Monofett';
+    font-size: 50pt;
+    color:rgb(251, 255, 23);
+}
+
+.bookmarkFont{
+    color:ghostwhite;
+    font-size: 20pt;
+    font-family:cursive;
+    position: relative;
+    left: 43%;
+    top: 30pt;
+}
+
+.addBox{
+    position: fixed;
+    left: 41%;
+    top: 80pt;
+}
+
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    transition: width 0.4s ease-in-out;}
+
+    input[type=text]:focus {
+        width: 70%;}
+
+        .myButton {
+            box-shadow: 3px 4px 0px 0px #899599;
+            background:linear-gradient(to bottom, #ffffff 5%, #bab1ba 100%);
+            background-color:#ffffff;
+            border-radius:15px;
+            border:1px solid #d6bcd6;
+            display:inline-block;
+            cursor:pointer;
+            color:#3a8a9e;
+            font-family:Arial;
+            font-size:17px;
+            padding:7px 25px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #e1e2ed;
+        }
+        .myButton:hover {
+            background:linear-gradient(to bottom, #bab1ba 5%, #ffffff 100%);
+            background-color:#bab1ba;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+        
+
+        .deleteButton {
+            box-shadow:inset 0px 1px 0px 0px #f5978e;
+            background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+            background-color:#f24537;
+            border-radius:6px;
+            border:1px solid #d02718;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #810e05;
+        }
+        .deleteButton:hover {
+            background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+            background-color:#c62d1f;
+        }
+        .deleteButton:active {
+            position:relative;
+            top:1px;
+        }
+        
+
+        .editButton {
+            box-shadow:inset 0px 1px 0px 0px #e184f3;
+            background:linear-gradient(to bottom, #c123de 5%, #a20dbd 100%);
+            background-color:#c123de;
+            border-radius:6px;
+            border:1px solid #a511c0;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #9b14b3;
+        }
+        .editButton:hover {
+            background:linear-gradient(to bottom, #a20dbd 5%, #c123de 100%);
+            background-color:#a20dbd;
+        }
+        .editButton:active {
+            position:relative;
+            top:1px;
+        }

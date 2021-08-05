@@ -1,21 +1,28 @@
-<h1>Bookmarks</h1>
-<body>
-    <div>
+<link rel="stylesheet" href="styles.css">
+<link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+<style>
+    form { display: inline; }
+  </style>
+
+<h1 class="centreHeading">Bookmarks</h1>
+<div class="bookmarkFont">
 <p> <% bookmark.map((bookmark, index) => { %>
+    <br>
+    <br>
     <%= bookmark.url %>
     <br>
     <form action="/<%=bookmark.id%>?_method=DELETE" method="POST">
-    <input type="submit" value="Delete" id="deleteButton">
+    <input class="deleteButton" type="submit" value="Delete" id="deleteButton">
     </form>
     <form action="/edit/<%=bookmark.id%>?_method=GET" method="GET">
-        <input type="submit" value="Edit">
+        <input class="editButton" type="submit" value="Edit">
     </form>
     <% }) %>
 </p>
-
-<form action="/" method="post">
-    <input id="url" type="text" name="url" >
-    <input id="addButton" type="submit" value="Add">
-</form>
 </div>
-</body>
+
+<form class="addBox" action="/" method="post">
+    <input id="url" type="text" name="url" >
+    <input class="myButton" id="addButton" type="submit" value="Add">
+</form>
+
