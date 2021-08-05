@@ -11,7 +11,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 app.get('/', async (req, res) => {
-    const bookmarks = await models.Bookmark.findAll({})
+    const bookmarks = await models.Bookmark.findAll({
+        order:['id']
+    })
     res.render('index.ejs',{
         bookmark: bookmarks
     })
@@ -29,6 +31,21 @@ app.delete('/:id', async (req, res) => {
         where: {
             id: req.params.id
         }
+    })
+    res.redirect('/')
+})
+
+app.get('/edit/:id', (req, res) => {
+    res.render('update.ejs', {
+        id: req.params.id
+    })
+})
+
+app.put('/edit/:id', async (req, res) =>{
+
+    await models.Bookmark.update({
+        url: req.body.url},
+        {where: {id: req.params.id}
     })
     res.redirect('/')
 })

@@ -7,6 +7,9 @@
     <form action="/<%=bookmark.id%>?_method=DELETE" method="POST">
     <input type="submit" value="Delete" id="deleteButton">
     </form>
+    <form action="/edit/<%=bookmark.id%>?_method=GET" method="GET">
+        <input type="submit" value="Edit">
+    </form>
     <% }) %>
 </p>
 
