@@ -17,6 +17,9 @@
     <form action="/edit/<%=bookmark.id%>?_method=GET" method="GET">
         <input class="editButton" type="submit" value="Edit">
     </form>
+    <form action="/comment/<%=bookmark.id%>?_method=GET" method="GET">
+        <input class="commentButton" type="submit" value="View Comments">
+    </form>
     <% }) %>
 </p>
 </div>

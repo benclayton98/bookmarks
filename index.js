@@ -51,6 +51,29 @@ app.put('/edit/:id', async (req, res) =>{
     res.redirect('/')
 })
 
+app.get('/comment/:id', async (req, res) => {
+    const commentUrl = await models.Bookmark.findAll({
+        where: {
+            id: req.params.id}
+        })
+        console.log(commentUrl)
+    res.render('comment.ejs', {
+        id: req.params.id,
+        url: commentUrl
+    })
+})
+
+app.put('/comment/:id', async (req, res) =>{
+
+    await models.Bookmark.update({
+        url: req.body.url,
+        comment: req.body.comment},
+        {where: {id: req.params.id}
+    })
+    res.redirect('/comment')
+})
+
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
   })

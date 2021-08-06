@@ -1,0 +1,12 @@
+<p> <% url.map(url => { %>
+<h1>Add a comment to: <%= url.url %> </h1>
+<% }) %>
+
+<form action="/comment/<%=id%>" method="post">
+    <input id="comment" type="text" name="comment" >
+    <input id="comment-button" type="submit" value="Add Comment">
+</form>
+<form action="/comment/<%=id%>?_method=PUT" method="post">
+    <input id="comment-button" type="submit" value="Edit Comment">
+</form>
+</p>
