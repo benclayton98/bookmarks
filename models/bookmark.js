@@ -3,21 +3,21 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class bookmarks extends Model {
+  class bookmark extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        this.Comments = this.hasMany(models.Comment, { onDelete: 'cascade' })
+      this.Comments = this.hasMany(models.Comment, { onDelete: 'cascade' })
     }
   };
-  bookmarks.init({
+  bookmark.init({
     url: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'bookmarks',
+    modelName: 'bookmark',
   });
-  return bookmarks;
+  return bookmark;
 };

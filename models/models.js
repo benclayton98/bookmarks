@@ -11,9 +11,10 @@ const sequelize = new Sequelize(
 );
 
 const models = {
-    Bookmark: require('./bookmarks')(sequelize, DataTypes),
+    Bookmark: require('./bookmark')(sequelize, DataTypes),
+    Comment: require('./comment')(sequelize, DataTypes)
 };
-  
+
 module.exports = {
     sequelize: sequelize,
     models: models

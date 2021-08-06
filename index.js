@@ -56,22 +56,29 @@ app.get('/comment/:id', async (req, res) => {
         where: {
             id: req.params.id}
         })
-        console.log(commentUrl)
+    const comments = await models.Comment.findAll({})
     res.render('comment.ejs', {
         id: req.params.id,
-        url: commentUrl
+        url: commentUrl,
+        comments: comments
     })
 })
 
-app.put('/comment/:id', async (req, res) =>{
-
-    await models.Bookmark.update({
-        url: req.body.url,
-        comment: req.body.comment},
-        {where: {id: req.params.id}
-    })
-    res.redirect('/comment')
+app.post('/comment/:id', async (req, res) => {
+    const comments = await models.Comment.create({ comment: req.body.comments})
+    id = req.params.id
+    res.redirect(`/comment/${id}`)
 })
+
+// app.put('/comment/:id', async (req, res) =>{
+
+//     await models.Bookmark.update({
+//         url: req.body.url,
+//         comment: req.body.comment},
+//         {where: {id: req.params.id}
+//     })
+//     res.redirect('/comment')
+// })
 
 
 app.listen(port, () => {
