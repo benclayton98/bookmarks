@@ -5,27 +5,42 @@
   </style>
 
 <h1 class="centreHeading">Bookmarks</h1>
+<h3 class="bookmarkFont">To sort by a specific tag, click on that Tag's link</h3>
 <div class="bookmarkFont">
 <p> <% bookmark.map((bookmark, index) => { %>
     <br>
-    <br>
     <%= bookmark.url %>
     <br>
+    <% tag.map(tag => { %>
+        <% if (tag.BookmarkId === bookmark.id){ %>
+       <a href="/tag/<%=tag.name%>"> <%= tag.name %> </a><br>
+            <% }}) %>
+
+    <% comment.map(comment => { %>
+        <% if (comment.UrlId === bookmark.id){ %>
+        <%= comment.comment %>
+        <% }})%>
     <form action="/<%=bookmark.id%>?_method=DELETE" method="POST">
     <input class="deleteButton" type="submit" value="Delete" id="deleteButton">
     </form>
     <form action="/edit/<%=bookmark.id%>?_method=GET" method="GET">
         <input class="editButton" type="submit" value="Edit">
     </form>
-    <form action="/comment/<%=bookmark.id%>?_method=GET" method="GET">
-        <input class="commentButton" type="submit" value="View Comments">
+    <form action="/tag<%=bookmark.id%>" method="POST">
+        <input type="text" name="tag" id="tagText">
+        <input type="submit" value="Add Tag">
+    </form>
+    <form action="/comment<%=bookmark.id%>" method="POST">
+        <input type="text" name="comment" id="commentText">
+        <input class="commentButton" type="submit" value="Add Comments">
     </form>
     <% }) %>
+
 </p>
 </div>
 
 <form class="addBox" action="/" method="post">
     <input id="url" type="text" name="url" >
-    <input class="myButton" id="addButton" type="submit" value="Add">
+    <input class="myButton" id="addButton" type="submit" value="Add Bookmark">
 </form>
 

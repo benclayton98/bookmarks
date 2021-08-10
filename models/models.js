@@ -12,7 +12,8 @@ const sequelize = new Sequelize(
 
 const models = {
     Bookmark: require('./bookmark')(sequelize, DataTypes),
-    Comment: require('./comment')(sequelize, DataTypes)
+    Comment: require('./comment')(sequelize, DataTypes),
+    Tag: require('./tag')(sequelize, DataTypes)
 };
 
 module.exports = {

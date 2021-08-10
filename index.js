@@ -15,8 +15,12 @@ app.get('/', async (req, res) => {
     const bookmarks = await models.Bookmark.findAll({
         order:['id']
     })
+    const comment = await models.Comment.findAll({})
+    const tag = await models.Tag.findAll({})
     res.render('index.ejs',{
-        bookmark: bookmarks
+        bookmark: bookmarks,
+        comment: comment,
+        tag: tag
     })
 })
 
@@ -29,7 +33,7 @@ app.post('/', async (req, res) => {
 
 app.delete('/:id', async (req, res) => {
     await models.Bookmark.destroy({
-        where: {
+        where: {   
             id: req.params.id
         }
     })
@@ -51,35 +55,37 @@ app.put('/edit/:id', async (req, res) =>{
     res.redirect('/')
 })
 
-app.get('/comment/:id', async (req, res) => {
-    const commentUrl = await models.Bookmark.findAll({
-        where: {
-            id: req.params.id}
-        })
-    const comments = await models.Comment.findAll({})
-    res.render('comment.ejs', {
-        id: req.params.id,
-        url: commentUrl,
-        comments: comments
+
+app.post('/comment:id', async (req, res) => {
+    await models.Comment.create({ 
+        comment: req.body.comment, 
+        UrlId: req.params.id 
+    })
+    res.redirect('/')
+})
+
+app.post('/tag:id', async (req, res) => {
+    await models.Tag.create({
+        name: req.body.tag,
+        BookmarkId: req.params.id
+    })
+    res.redirect('/')
+})
+
+app.get('/tag/:name', async (req, res) => {
+    const tags = await models.Tag.findAll({
+        where:{
+            name: req.params.name
+        }
+    })
+    const comment = await models.Comment.findAll({})
+    res.render('tags.ejs', {
+        tag: tags,
+        comment: comment,
+        bookmarks: bookmarks
+
     })
 })
-
-app.post('/comment/:id', async (req, res) => {
-    const comments = await models.Comment.create({ comment: req.body.comments})
-    id = req.params.id
-    res.redirect(`/comment/${id}`)
-})
-
-// app.put('/comment/:id', async (req, res) =>{
-
-//     await models.Bookmark.update({
-//         url: req.body.url,
-//         comment: req.body.comment},
-//         {where: {id: req.params.id}
-//     })
-//     res.redirect('/comment')
-// })
-
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

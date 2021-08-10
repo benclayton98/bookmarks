@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.Comments = this.hasMany(models.Comment, { onDelete: 'cascade' })
+      this.Tags = this.hasMany(models.Tag, { onDelete: 'cascade' })
     }
   };
   bookmark.init({
