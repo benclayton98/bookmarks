@@ -11,16 +11,6 @@ module.exports = {
       comment: {
         type: Sequelize.STRING
       },
-      UrlId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'bookmarks'
-          },
-          key: 'id'
-        },
-        allowNull: false
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

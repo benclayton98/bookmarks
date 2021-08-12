@@ -4,7 +4,7 @@ const app = express()
 const port = 3000
 const methodOverride = require('method-override')
 
-const { models } = require('./models/models.js');
+const { Tag, BookmarksTag, Bookmark, Comment } = require('./models');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
@@ -12,27 +12,34 @@ app.use(methodOverride('_method'))
 app.use(express.static("public"));
 
 app.get('/', async (req, res) => {
-    const bookmarks = await models.Bookmark.findAll({
-        order:['id']
+    const bookmarks = await Bookmark.findAll({
+        order:[['id', 'DESC']],
+        include:{
+            all: true
+        }
     })
-    const comment = await models.Comment.findAll({})
-    const tag = await models.Tag.findAll({})
+    const comment = await Comment.findAll({})
+    const tag = await BookmarksTag.findAll({
+        include: {
+            all: true
+        }
+    })
     res.render('index.ejs',{
         bookmark: bookmarks,
         comment: comment,
-        tag: tag
+        BookmarksTag: tag
     })
 })
 
 app.post('/', async (req, res) => {
-    await models.Bookmark.create({
+    await Bookmark.create({
         url: req.body.url
     })
     res.redirect('/')
 })
 
 app.delete('/:id', async (req, res) => {
-    await models.Bookmark.destroy({
+    await Bookmark.destroy({
         where: {   
             id: req.params.id
         }
@@ -48,7 +55,7 @@ app.get('/edit/:id', (req, res) => {
 
 app.put('/edit/:id', async (req, res) =>{
 
-    await models.Bookmark.update({
+    await Bookmark.update({
         url: req.body.url},
         {where: {id: req.params.id}
     })
@@ -57,35 +64,41 @@ app.put('/edit/:id', async (req, res) =>{
 
 
 app.post('/comment:id', async (req, res) => {
-    await models.Comment.create({ 
+    await Comment.create({ 
         comment: req.body.comment, 
-        UrlId: req.params.id 
+        BookmarkId: req.params.id 
     })
     res.redirect('/')
 })
 
 app.post('/tag:id', async (req, res) => {
-    await models.Tag.create({
-        name: req.body.tag,
+    req.app.locals.newTag = await Tag.create({
+        name: req.body.tag
+    })
+    res.redirect(`/newtag${req.params.id}`)
+})
+
+app.get('/newtag:id/', async (req, res) => {
+    await BookmarksTag.create({
+        TagId:  req.app.locals.newTag.id,
         BookmarkId: req.params.id
     })
     res.redirect('/')
 })
 
 app.get('/tag/:name', async (req, res) => {
-    const tags = await models.Tag.findAll({
-        where:{
-            name: req.params.name
-        }
-    })
-    const comment = await models.Comment.findAll({})
-    res.render('tags.ejs', {
-        tag: tags,
-        comment: comment,
-        bookmarks: bookmarks
+    
+    const bookmarks = await Bookmark.findAll({
+        include: [{
+            model: Tag,
+            where: {
+              name: req.params.name
+        }}]})
 
+    res.render('tags.ejs', {
+        bookmarks: bookmarks
     })
-})
+    })
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

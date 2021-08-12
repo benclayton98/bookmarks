@@ -10,14 +10,18 @@
 <p> <% bookmark.map((bookmark, index) => { %>
     <br>
     <%= bookmark.url %>
+    <%= bookmark.Tag.name %>
     <br>
-    <% tag.map(tag => { %>
+    <% BookmarksTag.map(tag => { %>
         <% if (tag.BookmarkId === bookmark.id){ %>
-       <a href="/tag/<%=tag.name%>"> <%= tag.name %> </a><br>
+        
+            <%= console.log(tag) %>
+
+       <a href="/tag/<%=tag.name%>"> <%= tag.id %> </a><br>
             <% }}) %>
 
     <% comment.map(comment => { %>
-        <% if (comment.UrlId === bookmark.id){ %>
+        <% if (comment.BookmarkId === bookmark.id){ %>
         <%= comment.comment %>
         <% }})%>
     <form action="/<%=bookmark.id%>?_method=DELETE" method="POST">

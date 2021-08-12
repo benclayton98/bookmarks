@@ -1,11 +1,13 @@
 <div id="bookmarks">
+    
+
     <% bookmarks.forEach((bookmark, index) => { %>
-        <% tag.map(tag => { %>
-            <% if (tag.name === bookmark.){ %>
-           <a href="/tag/<%=tag.name%>"> <%= tag.name %> </a><br>
-                <% }}) %>  
-        <span><%= bookmark.url %> <br></span>
-         
-            <a href="/tags/<%= tag.name %>"><%= tag.name %></a>
-    <% }) %>
+        <span><%= bookmark.url %></span>
+        <% bookmark.Tags.forEach(tag => { %>
+        <a href="/tags/<%= tag.name %>"><%= tag.name %></a>
+        <% }) %>
+        <% }) %>
+
+    
+
   </div>
