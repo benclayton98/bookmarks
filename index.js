@@ -72,29 +72,22 @@ app.post('/comment:id', async (req, res) => {
 })
 
 app.post('/tag:id', async (req, res) => {
-    req.app.locals.newTag = await Tag.create({
-        name: req.body.tag
+    const newTag = await Tag.findOrCreate({
+        where: {
+            name: req.body.tag
+        }
     })
-    res.redirect(`/newtag${req.params.id}`)
-})
-
-app.get('/newtag:id/', async (req, res) => {
-    await BookmarksTag.create({
-        TagId:  req.app.locals.newTag.id,
-        BookmarkId: req.params.id
+    const bookmark = await Bookmark.findOne({
+        where: {
+            id : req.params.id
+        }
     })
-    res.redirect('/')
+    newTag[0].addBookmark(bookmark)
+    res.redirect(`/`)
 })
 
 app.get('/tag/:name', async (req, res) => {
     
-    const bookmarks = await Bookmark.findAll({
-        include: [{
-            model: Tag,
-            where: {
-              name: req.params.name
-        }}]})
-
     res.render('tags.ejs', {
         bookmarks: bookmarks
     })

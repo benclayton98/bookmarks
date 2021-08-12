@@ -10,15 +10,12 @@
 <p> <% bookmark.map((bookmark, index) => { %>
     <br>
     <%= bookmark.url %>
-    <%= bookmark.Tag.name %>
+    <%= bookmark.Tags.name %>
     <br>
-    <% BookmarksTag.map(tag => { %>
-        <% if (tag.BookmarkId === bookmark.id){ %>
-        
-            <%= console.log(tag) %>
-
-       <a href="/tag/<%=tag.name%>"> <%= tag.id %> </a><br>
-            <% }}) %>
+    <% bookmark.Tags.map(tag => { %>        
+        <%= tag.name %>
+        <a href="/tag/<%=tag.name%>"> <%= tag.id %> </a><br>
+    <% }) %>
 
     <% comment.map(comment => { %>
         <% if (comment.BookmarkId === bookmark.id){ %>

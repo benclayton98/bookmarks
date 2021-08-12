@@ -10,6 +10,16 @@ module.exports = {
       },
       comment: {
         type: Sequelize.STRING
+      },      
+      BookmarkId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Bookmarks'
+          },
+          key: 'id'
+        },
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,
