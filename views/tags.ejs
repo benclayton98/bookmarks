@@ -1,11 +1,10 @@
 <div id="bookmarks">
-    
 
-    <% bookmarks.forEach((bookmark, index) => { %>
-        <span><%= bookmark.url %></span>
-        <% bookmark.Tags.forEach(tag => { %>
-        <a href="/tags/<%= tag.name %>"><%= tag.name %></a>
-        <% }) %>
+    <% console.log(tag.Bookmarks) %>
+
+    <% tag.Bookmarks.forEach((bookmark, index) => { %>
+        
+        <span><%= bookmark.url %></span><br> <br>
         <% }) %>
 
     

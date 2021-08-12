@@ -5,16 +5,16 @@
   </style>
 
 <h1 class="centreHeading">Bookmarks</h1>
+
 <h3 class="bookmarkFont">To sort by a specific tag, click on that Tag's link</h3>
 <div class="bookmarkFont">
-<p> <% bookmark.map((bookmark, index) => { %>
+<p> <% bookmarks.map((bookmark, index) => { %>
     <br>
     <%= bookmark.url %>
     <%= bookmark.Tags.name %>
     <br>
     <% bookmark.Tags.map(tag => { %>        
-        <%= tag.name %>
-        <a href="/tag/<%=tag.name%>"> <%= tag.id %> </a><br>
+        <a href="/tag/<%=tag.name%>"> <%= tag.name %> </a><br>
     <% }) %>
 
     <% comment.map(comment => { %>

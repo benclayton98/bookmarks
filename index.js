@@ -5,6 +5,7 @@ const port = 3000
 const methodOverride = require('method-override')
 
 const { Tag, BookmarksTag, Bookmark, Comment } = require('./models');
+const tag = require('./models/tag')
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
@@ -25,7 +26,7 @@ app.get('/', async (req, res) => {
         }
     })
     res.render('index.ejs',{
-        bookmark: bookmarks,
+        bookmarks: bookmarks,
         comment: comment,
         BookmarksTag: tag
     })
@@ -87,11 +88,18 @@ app.post('/tag:id', async (req, res) => {
 })
 
 app.get('/tag/:name', async (req, res) => {
-    
+    const tag = await Tag.findOne({
+        where: {
+            name: req.params.name
+        },
+        include:{
+            all: true
+        }
+    })
     res.render('tags.ejs', {
-        bookmarks: bookmarks
+        tag: tag
     })
-    })
+ })
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
